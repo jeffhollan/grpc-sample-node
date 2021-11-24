@@ -1,4 +1,4 @@
-
+// Modified from https://github.com/grpc/grpc/blob/v1.41.0/examples/node/dynamic_codegen/greeter_server.js
 var PROTO_PATH = __dirname + '/../protos/greet.proto';
 
 var grpc = require('@grpc/grpc-js');

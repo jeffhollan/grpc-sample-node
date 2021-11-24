@@ -1,0 +1,29 @@
+{
+  "name": "grpc-sample-node.https-frontend",
+  "version": "0.1.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeffhollan/grpc-sample-node.git"
+  },
+  "keywords": [
+    "azure-container-apps",
+    "grpc"
+  ],
+  "author": "Jeff Hollan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jeffhollan/grpc-sample-node/issues"
+  },
+  "homepage": "https://github.com/jeffhollan/grpc-sample-node#readme",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.4.4",
+    "@grpc/proto-loader": "^0.6.7",
+    "minimist": "^1.2.5"
+  }
+}
