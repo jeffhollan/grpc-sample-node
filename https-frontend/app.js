@@ -4,6 +4,7 @@ var PROTO_PATH = __dirname + '/../protos/greet.proto';
 var parseArgs = require('minimist');
 var grpc = require('@grpc/grpc-js');
 var protoLoader = require('@grpc/proto-loader');
+var http = require('http');
 var packageDefinition = protoLoader.loadSync(
     PROTO_PATH,
     {keepCase: true,
@@ -14,22 +15,20 @@ var packageDefinition = protoLoader.loadSync(
     });
 var hello_proto = grpc.loadPackageDefinition(packageDefinition).greet;
 
-function main() {
-  var argv = parseArgs(process.argv.slice(2), {
-    string: 'target'
-  });
-  var target;
-  if (argv.target) {
-    target = argv.target;
-  } else {
-    target = 'localhost:50051';
-  }
-  var client = new hello_proto.Greeter(target,
-                                       grpc.credentials.createInsecure());
-  var user = "Azure Container Apps";
-  client.sayHello({name: user}, function(err, response) {
-    console.log(response.message);
-  });
-}
+const hostname = '0.0.0.0';
+const port = 8050;
+const target = 'localhost:50051';
 
-main();
+const server = http.createServer((req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    var client = new hello_proto.Greeter(target,
+        grpc.credentials.createInsecure());
+    client.sayHello({name: "Azure Container Apps"}, function(err, response) {
+        res.end(response.message);
+    });
+  });
+  
+server.listen(port, hostname, () => {
+    console.log(`Server running at http://${hostname}:${port}/`);
+  });
