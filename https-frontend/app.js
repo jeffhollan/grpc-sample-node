@@ -23,7 +23,7 @@ const server = http.createServer((req, res) => {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/plain');
     var client = new hello_proto.Greeter(target,
-        grpc.credentials.createSsl());
+        target.endsWith(':443') ? grpc.credentials.createSsl() : grpc.credentials.createInsecure());
     client.sayHello({name: "Azure Container Apps"}, function(err, response) {
         res.end(response.message);
     });
