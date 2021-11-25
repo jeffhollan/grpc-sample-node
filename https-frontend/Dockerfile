@@ -1,6 +1,6 @@
 FROM node:16-alpine
 WORKDIR /usr/src/app/https-frontend
-COPY package*.json ./
+COPY https-frontend/package*.json ./
 RUN npm install
 WORKDIR /usr/src/app
 COPY . .
