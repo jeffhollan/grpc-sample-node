@@ -63,4 +63,4 @@ az containerapp create \
 
 ### Try the solution
 
-After deploying, get the FQDN of the https-frontend and call it and hit the `/hello` endpoint. It will call the gRPC backend (via gRPC) and return a message to the client.
+After deploying, get the FQDN of the https-frontend and browse to it. It will call the gRPC backend (via gRPC) and return a message to the client.
