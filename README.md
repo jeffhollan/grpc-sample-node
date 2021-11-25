@@ -1,4 +1,4 @@
-# gRPC Sample : Go
+# gRPC Sample : Node / JavaScript
 
 The following is a sample of a gRPC client calling another container running gRPC server to execute a `SayHello` call.  The solution runs on Azure Container Apps.
 
@@ -39,7 +39,7 @@ az containerapp create \
   --name grpc-backend \
   --resource-group $RESOURCE_GROUP \
   --environment $ACA_ENVIRONMENT \
-  --image ghcr.io/jeffhollan/grpc-sample-go/grpc-backend:main \
+  --image ghcr.io/jeffhollan/grpc-sample-node/grpc-backend:main \
   --ingress 'internal' \
   --target-port 50051 \
   --transport 'http2'
@@ -54,7 +54,7 @@ az containerapp create \
   --name https-frontend \
   --resource-group $RESOURCE_GROUP \
   --environment $ACA_ENVIRONMENT \
-  --image ghcr.io/jeffhollan/grpc-sample-go/https-frontend:main \
+  --image ghcr.io/jeffhollan/grpc-sample-node/https-frontend:main \
   --environment-variables GRPC_SERVER_ADDRESS=$GRPC_SERVER_ADDRESS':443' \
   --target-port 8050 \
   --ingress 'external' \
@@ -64,9 +64,3 @@ az containerapp create \
 ### Try the solution
 
 After deploying, get the FQDN of the https-frontend and call it and hit the `/hello` endpoint. It will call the gRPC backend (via gRPC) and return a message to the client.
-
-## Build and run the code
-
-### Generate the protobuf client
-
-`protoc protos/greet.proto -I. --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative`

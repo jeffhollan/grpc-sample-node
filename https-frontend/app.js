@@ -17,7 +17,7 @@ var hello_proto = grpc.loadPackageDefinition(packageDefinition).greet;
 
 const hostname = '0.0.0.0';
 const port = 8050;
-const target = 'localhost:50051';
+const target = process.env.GRPC_SERVER_ADDRESS || 'localhost:50051';
 
 const server = http.createServer((req, res) => {
     res.statusCode = 200;
